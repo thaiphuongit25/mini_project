@@ -1,0 +1,16 @@
+đầu vào: nhập vào tiêu đề, và check số lượng max
+đầu ra: danh sách, cập nhật số lương
+cấu trúc dữ liệu lưu trử: 3 biến lưu trử số lượng task:
+biến let todoCount -> đếm số lượng to do
+biến let doingCount -> đếm số lượng doing 
+biến let doneCount -> đếm số lượng done 
+
+mảng let todos = [], cấu trúc dữ liêu object {title: "phan trang"}
+mảng let doings = [], mảng lưu trử doing, object như trên 
+mảng let dones = [], mảng lưu trử done, object như trên 
+mảng let settings = {todo: 3, doing: 3, done: 4}
+- các phép toán xẩy ra, todos.push(object) , object = {title: "phan trang", id: 123 }
+- phép toán cập nhật phân tử chứ title
+- Phép toán xóa 
+
+- lưu trử vào đâu: localStore hoăc cookies 
