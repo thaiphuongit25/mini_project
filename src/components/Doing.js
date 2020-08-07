@@ -5,11 +5,11 @@ class Doing extends Component {
         return (
             <div>
                 <div className='status'>
-                    <b>Doing <span class="label label-primary">0</span></b>
+                    <b>Doing <span className="label label-primary">0</span></b>
                 </div>
-                <div class="inner-addon left-addon">
-                    <i class="glyphicon glyphicon-plus"></i>      
-                    <input type="text" class="form-control" placeholder="Type task and press Enter to add ..." />
+                <div className="inner-addon left-addon">
+                    <i className="glyphicon glyphicon-plus"></i>      
+                    <input type="text" className="form-control" placeholder="Type task and press Enter to add ..." />
                 </div>
             </div>
         );

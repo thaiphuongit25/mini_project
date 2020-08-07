@@ -7,6 +7,7 @@ class Todo extends Component {
         this.state = {
             todo: [], 
         }       
+        this.name = React.createRef();
     }
     componentDidMount () {
         let atr = localStorage.getItem("todo");
@@ -15,8 +16,8 @@ class Todo extends Component {
         }
     }
     creatTask = (e) => {
-        let text = this.refs.name.value
-        this.refs.name.value = ''
+        let text = this.name.current.value
+        this.name.current.value = ''
         if(text.length == 0) {
             alert('Vui lòng nhập công việc')
         } else {
@@ -39,14 +40,14 @@ class Todo extends Component {
         <b>Todo <span className="label label-primary">{ this.state.todo.length }</span></b>
                 </div>
                 <div className="inner-addon left-addon">
-                    <i class="glyphicon glyphicon-plus"
+                    <i className="glyphicon glyphicon-plus"
                         onClick={this.creatTask}
                     >
                     </i>      
                     <input type="text" 
                            className="form-control" 
                            placeholder="Type task and press Enter to add ..."
-                           ref='name'
+                           ref={this.name}
                     />
                 </div>
                 <div>
@@ -55,20 +56,20 @@ class Todo extends Component {
                             <div className="alert alert-success "  role="alert" key={i}>
                                 {emp.name}
                                 <span 
-                                    class="glyphicon glyphicon-trash"
+                                    className="glyphicon glyphicon-trash"
                                     data-toggle="modal" data-target="#myModal"
                                 >
                                 </span>
-                                <div class="modal fade" id="myModal" role="dialog">
-                                    <div class="modal-dialog">                              
-                                    <div class="modal-content">
-                                        <div class="modal-body">
+                                <div className="modal fade" id="myModal" role="dialog">
+                                    <div className="modal-dialog">                              
+                                    <div className="modal-content">
+                                        <div className="modal-body">
                                             <p>Delete Task</p>
                                             <p>You sent a request to delete this task. Are you sure?</p>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success" onClick={() => this.workDelete(this, emp.id)}>Yes</button>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" className="btn btn-success" onClick={() => this.workDelete(this, emp.id)}>Yes</button>
                                         </div>
                                     </div>
                                     

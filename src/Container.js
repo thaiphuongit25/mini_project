@@ -9,13 +9,13 @@ class Container extends Component {
         return (
             <div className="container">          
                 <div className="row">
-                    <div class="col-md-4">
+                    <div className="col-md-4">
                         <Todo />
                     </div>
-                    <div class="col-md-4">
+                    <div className="col-md-4">
                         <Doing />
                     </div>                                          
-                    <div class="col-md-4">
+                    <div className="col-md-4">
                         <Done />
                     </div> 
                 </div>                    
