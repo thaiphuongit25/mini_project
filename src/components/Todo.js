@@ -14,28 +14,29 @@ class Todo extends Component {
             this.setState({todo: JSON.parse(atr)});
         }
     }
-    creatTask = () => {
+    creatTask = (e) => {
         let text = this.refs.name.value
         this.refs.name.value = ''
-        if(text == 0) {
+        if(text.length == 0) {
             alert('Vui lòng nhập công việc')
         } else {
-            let atr =  this.state.todo.concat([{name: text}]);
+            let atr =  this.state.todo.concat([{name: text, id: idGenerator()}]);
             localStorage.setItem("todo", JSON.stringify(atr))
             this.setState({
                 todo: atr
             });
         }
     }
-    workDelete = e => {
-        let todoArray = this.state.todo.filter(work => work !== e.target.value)
+    workDelete = (e, value) => {
+        let todoArray = this.state.todo.filter(todo => todo.id !== value)
+        localStorage.setItem("todo", JSON.stringify(todoArray))
         this.setState({todo: todoArray});
     }
     render() {
         return (
             <div>
                 <div className='status'>
-                    <b>Todo <span className="label label-primary">0</span></b>
+        <b>Todo <span className="label label-primary">{ this.state.todo.length }</span></b>
                 </div>
                 <div className="inner-addon left-addon">
                     <i class="glyphicon glyphicon-plus"
@@ -67,7 +68,7 @@ class Todo extends Component {
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success" onClick={this.workDelete}>Yes</button>
+                                            <button type="button" class="btn btn-success" onClick={() => this.workDelete(this, emp.id)}>Yes</button>
                                         </div>
                                     </div>
                                     
