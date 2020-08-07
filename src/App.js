@@ -1,27 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './assert/style.scss';
-import './App.css';
+import React, { Component } from 'react';
+import './assert/title.scss';
+import Container from './Container'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <div className='title'>
+          <div className='title-name'><i>Kanban Board</i></div>
+          <div className="title-setUp glyphicon glyphicon-cog"></div>
+        </div>        
+        <Container />             
+      </div>
+    );
+  }
 }
 
 export default App;
