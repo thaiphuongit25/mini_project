@@ -38,6 +38,7 @@ class Todo extends Component {
         let todoArray = this.state.todo.filter(todo => todo.id !== value)
         localStorage.setItem("todo", JSON.stringify(todoArray))
         this.setState({todo: todoArray});
+        window.location.reload();
     }
     render() {
         return (

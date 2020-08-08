@@ -15,9 +15,9 @@ class Setup extends Component {
                             <div className="modal-content">
                                 <div className="modal-body">
                                     <p>Set up your Kanban</p>
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">Max to-do tasks</span>
-                                        <input type="text" class="form-control"                                                
+                                    <div className="input-group input-group-lg">
+                                        <span className="input-group-addon">Max to-do tasks</span>
+                                        <input type="text" className="form-control"                                                
                                         />
                                     </div>
                                 </div>
