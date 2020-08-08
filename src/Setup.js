@@ -7,10 +7,10 @@ class Setup extends Component {
                 <div className='title-name'><i>Kanban Board</i></div>
                 <div>
                     <div className="title-setUp glyphicon glyphicon-cog"
-                         data-toggle="modal" data-target="#myModal"
+                         data-toggle="modal" data-target="#setting"
                     >                       
                     </div>                   
-                    <div className="modal fade" id="myModal" role="dialog">
+                    <div className="modal fade" id="setting" role="dialog">
                         <div className="modal-dialog">                              
                             <div className="modal-content">
                                 <div className="modal-body">
