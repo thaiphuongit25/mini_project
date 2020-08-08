@@ -5,7 +5,8 @@ class Todo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            todo: [], 
+            todo: [],
+            number: 3
         }       
         this.name = React.createRef();
     }
@@ -23,10 +24,15 @@ class Todo extends Component {
         } else {
             let atr =  this.state.todo.concat([{name: text, id: idGenerator()}]);
             localStorage.setItem("todo", JSON.stringify(atr))
-            this.setState({
-                todo: atr
-            });
+            if(atr.length <= this.state.number) {
+                this.setState({
+                    todo: atr
+                });
+            } else {
+                alert('số lượng công việc ở cột to_do đã đạt giới hạn. Để thêm công việc, vui lòng xóa bớt hoặc thay đổi trong mục cài đặt')
+            }
         }
+         
     }
     workDelete = (e, value) => {
         let todoArray = this.state.todo.filter(todo => todo.id !== value)
@@ -37,7 +43,7 @@ class Todo extends Component {
         return (
             <div>
                 <div className='status'>
-        <b>Todo <span className="label label-primary">{ this.state.todo.length }</span></b>
+                    <b>Todo <span className="label label-primary">{ this.state.todo.length }</span></b>
                 </div>
                 <div className="inner-addon left-addon">
                     <i className="glyphicon glyphicon-plus"
@@ -62,17 +68,16 @@ class Todo extends Component {
                                 </span>
                                 <div className="modal fade" id="myModal" role="dialog">
                                     <div className="modal-dialog">                              
-                                    <div className="modal-content">
-                                        <div className="modal-body">
-                                            <p>Delete Task</p>
-                                            <p>You sent a request to delete this task. Are you sure?</p>
-                                        </div>
-                                        <div className="modal-footer">
-                                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" className="btn btn-success" onClick={() => this.workDelete(this, emp.id)}>Yes</button>
-                                        </div>
-                                    </div>
-                                    
+                                        <div className="modal-content">
+                                            <div className="modal-body">
+                                                <p>Delete Task</p>
+                                                <p>You sent a request to delete this task. Are you sure?</p>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" className="btn btn-success" onClick={() => this.workDelete(this, emp.id)}>Yes</button>
+                                            </div>
+                                        </div>                                    
                                     </div>
                                 </div>                       
                             </div>
