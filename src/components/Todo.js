@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import idGenerator from "react-id-generator";
+import Setup from './../Setup'
 
 class Todo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             todo: [],
-            number: 3
-        }       
+            data: localStorage.getItem("setup")
+        }      
         this.name = React.createRef();
     }
     componentDidMount () {
@@ -24,7 +25,7 @@ class Todo extends Component {
         } else {
             let atr =  this.state.todo.concat([{name: text, id: idGenerator()}]);
             localStorage.setItem("todo", JSON.stringify(atr))
-            if(atr.length <= this.state.number) {
+            if(atr.length <= this.state.data) {
                 this.setState({
                     todo: atr
                 });
