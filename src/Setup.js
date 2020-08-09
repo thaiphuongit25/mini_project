@@ -13,14 +13,14 @@ class Setup extends Component {
         this.setState({data: e.target.value});
      }
     componentDidMount () {
-        let atr = localStorage.getItem("setup");
+        let atr = localStorage.getItem('setting');
         if (atr) {
             this.setState({data: atr});
         }
     }
     setUp = (e) => {
         let text = this.refs.name.value
-        localStorage.setItem('setup', text)
+        localStorage.setItem('setting', text)
     }
     render() {
         return (

@@ -7,7 +7,7 @@ class Todo extends Component {
         super(props);
         this.state = {
             todo: [],
-            data: localStorage.getItem("setup")
+            data: localStorage.getItem('setting')
         }      
         this.name = React.createRef();
     }
@@ -39,6 +39,7 @@ class Todo extends Component {
         let todoArray = this.state.todo.filter(todo => todo.id !== value)
         localStorage.setItem("todo", JSON.stringify(todoArray))
         this.setState({todo: todoArray});
+        window.location.reload();
     }
     render() {
         return (
@@ -64,10 +65,10 @@ class Todo extends Component {
                                 {emp.name}
                                 <span 
                                     className="glyphicon glyphicon-trash"
-                                    data-toggle="modal" data-target="#myModal"
+                                    data-toggle="modal" data-target={`#${emp.id}`}
                                 >
                                 </span>
-                                <div className="modal fade" id="myModal" role="dialog">
+                                <div className="modal fade" id={`${emp.id}`} role="dialog">
                                     <div className="modal-dialog">                              
                                         <div className="modal-content">
                                             <div className="modal-body">
