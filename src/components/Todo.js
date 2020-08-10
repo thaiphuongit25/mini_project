@@ -7,9 +7,11 @@ class Todo extends Component {
         super(props);
         this.state = {
             todo: [],
-            data: localStorage.getItem('setting')
+            data: localStorage.getItem('setting'),
+            task: ''
         }      
         this.name = React.createRef();
+        this.updateState = this.updateState.bind(this)
     }
     componentDidMount () {
         let atr = localStorage.getItem("todo");
@@ -32,14 +34,32 @@ class Todo extends Component {
             } else {
                 alert('số lượng công việc ở cột to_do đã đạt giới hạn. Để thêm công việc, vui lòng xóa bớt hoặc thay đổi trong mục cài đặt')
             }
-        }
-         
+        }         
     }
     workDelete = (e, value) => {
         let todoArray = this.state.todo.filter(todo => todo.id !== value)
         localStorage.setItem("todo", JSON.stringify(todoArray))
         this.setState({todo: todoArray});
         window.location.reload();
+    }
+    updateState = e => {
+        this.setState({task: e.target.value});
+    }
+    changeTask = (e) => {
+        let abc = e.target.id
+        let todoTask = this.state.todo.find((emp) => {
+            if (emp.id === e.target.id) {
+                return emp
+            }
+        })
+        this.setState({
+            task: todoTask.name
+         });       
+    }
+    todoChange = (id, text) => {
+        this.setState({
+            todo: this.state.todo.map(el => (el.id === id ? Object.assign({}, el, { text }) : el))
+          });
     }
     render() {
         return (
@@ -49,7 +69,7 @@ class Todo extends Component {
                 </div>
                 <div className="inner-addon left-addon">
                     <i className="glyphicon glyphicon-plus"
-                        onClick={this.creatTask}
+                        onClick={() => this.creatTask}
                     >
                     </i>      
                     <input type="text" 
@@ -81,7 +101,34 @@ class Todo extends Component {
                                             </div>
                                         </div>                                    
                                     </div>
-                                </div>                       
+                                </div>
+                                <span 
+                                    className="glyphicon glyphicon-pencil"
+                                    data-toggle="modal" data-target='#myModal'
+                                    onClick = {this.changeTask}
+                                    id={emp.id}
+                                >
+                                </span>
+                                <div className="modal fade" id='myModal' role="dialog">
+                                    <div className="modal-dialog">                              
+                                        <div className="modal-content">
+                                            <div className="modal-body">
+                                                <p>Change Task</p>                                                
+                                            </div>
+                                                <div class="input-group input-group-lg" >
+                                                    <span class="input-group-addon">Your task</span>
+                                                    <input type="text" class="form-control"
+                                                       value =  {this.state.task}
+                                                       onChange = {this.updateState} 
+                                                    />
+                                                </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" className="btn btn-success" onClick={() => this.todoChange(this, emp.id)} id='myBtn'>Yes</button>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                </div>                            
                             </div>
                         )
                     })}
