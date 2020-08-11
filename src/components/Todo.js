@@ -36,7 +36,8 @@ class Todo extends Component {
             }
         }         
     }
-    workDelete = (e, value) => {
+    workDelete = (value) => {
+        alert(value)
         let todoArray = this.state.todo.filter(todo => todo.id !== value)
         localStorage.setItem("todo", JSON.stringify(todoArray))
         this.setState({todo: todoArray});
@@ -46,7 +47,6 @@ class Todo extends Component {
         this.setState({task: e.target.value});
     }
     changeTask = (e) => {
-        let abc = e.target.id
         let todoTask = this.state.todo.find((emp) => {
             if (emp.id === e.target.id) {
                 return emp
@@ -56,20 +56,18 @@ class Todo extends Component {
             task: todoTask.name
          });       
     }
-    todoChange = (id, text) => {
-        this.setState({
-            todo: this.state.todo.map(el => (el.id === id ? Object.assign({}, el, { text }) : el))
-          });
+    todoChange = (value) => {
+        alert(value)
     }
     render() {
         return (
             <div>
                 <div className='status'>
-                    <b>Todo <span className="label label-primary">{ this.state.todo.length }</span></b>
+                    <b>Todo <span className="label label-danger">{ this.state.todo.length }</span></b>
                 </div>
                 <div className="inner-addon left-addon">
                     <i className="glyphicon glyphicon-plus"
-                        onClick={() => this.creatTask}
+                        onClick={() => this.creatTask()}
                     >
                     </i>      
                     <input type="text" 
@@ -97,7 +95,7 @@ class Todo extends Component {
                                             </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-success" onClick={() => this.workDelete(this, emp.id)}>Yes</button>
+                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.workDelete(emp.id)}>Yes</button>
                                             </div>
                                         </div>                                    
                                     </div>
@@ -124,7 +122,7 @@ class Todo extends Component {
                                                 </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-success" onClick={() => this.todoChange(this, emp.id)} id='myBtn'>Yes</button>
+                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.id)}>Yes</button>
                                             </div>
                                         </div>                                    
                                     </div>

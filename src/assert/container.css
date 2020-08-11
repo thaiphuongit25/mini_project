@@ -10,10 +10,7 @@
     height: auto;
     background-color: #d3dfeb;
   }
-  .row div:nth-last-child(2) {
-    border-right: 30px solid #6a99b5;
-  }
-  .row div:nth-last-child(3) {
+  .row .col-md-4 {
     border-right: 30px solid #6a99b5;
   }
   .status {

@@ -1,3 +1,4 @@
+  
 import React, { Component } from 'react';
 
 class Setup extends Component {
@@ -36,9 +37,9 @@ class Setup extends Component {
                             <div className="modal-content">
                                 <div className="modal-body">
                                     <p>Set up your Kanban</p>
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">Max to-do tasks</span>
-                                        <input type="text" class="form-control"
+                                    <div className="input-group input-group-lg">
+                                        <span className="input-group-addon">Max to-do tasks</span>
+                                        <input type="number" class="form-control"
                                             value = {this.state.data}
                                             ref ='name'
                                             onChange = {this.updateState} 
@@ -47,7 +48,7 @@ class Setup extends Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-success" onClick={this.setUp}>Save</button>
+                                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={this.setUp}>Save</button>
                                 </div>
                             </div>                                    
                         </div>
