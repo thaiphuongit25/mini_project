@@ -57,8 +57,8 @@ class Todo extends Component {
          });       
     }
     todoChange = (emp) => {
-        const todoChange = this.state.todo.findIndex((e) => e.id === emp.id);
-        const updatedTodoChange = update(this.state.todo, {$splice: [[todoChange, emp]]});
+        const todoChange = this.state.todo.findIndex((k) => k.id === emp.id);
+        const updatedTodoChange = update(this.state.todo, {$splice: [[todoChange, 1, emp]]});
         this.setState({todo: updatedTodoChange});       
     }
     render() {
