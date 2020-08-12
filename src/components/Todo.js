@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import idGenerator from "react-id-generator";
 import Setup from './../Setup'
+import { Alert } from 'react-bootstrap';
 
 class Todo extends Component {
     constructor(props) {
@@ -55,9 +56,13 @@ class Todo extends Component {
             task: todoTask.name
          });       
     }
-    todoChange = (id, value) => {
-        const updatedTodoChange = update(this.state.todo, {$splice: [[id, 1, value]]});
-        this.setState({todo: updatedTodoChange});       
+    todoChange = (value) => {
+        this.state.todo.map(e => {
+            if(e.name === value) {
+                e.name = this.state.task
+            }
+        })
+        window.location.reload();
     }
     render() {
         return (
@@ -111,8 +116,7 @@ class Todo extends Component {
                                     <div className="modal-dialog">                              
                                         <div className="modal-content">
                                             <div className="modal-body">
-                                                <p>Change Task</p>   
-                                                 <p>noi dung task: { emp.name }</p>                                               
+                                                <p>Change Task</p>                                                
                                             </div>
                                                 <div class="input-group input-group-lg" >
                                                     <span class="input-group-addon">Your task</span>
@@ -123,7 +127,7 @@ class Todo extends Component {
                                                 </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.id, emp.name)}>Yes</button>
+                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.name)}>Yes</button>
                                             </div>
                                         </div>                                    
                                     </div>
