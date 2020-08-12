@@ -57,7 +57,7 @@ class Todo extends Component {
          });       
     }
     todoChange = (emp) => {
-        const todoChange = this.state.todo.findIndex((k) => k.id === emp.id);
+        const todoChange = this.state.todo.findIndex((e) => e.id === emp.id);
         const updatedTodoChange = update(this.state.todo, {$splice: [[todoChange, emp]]});
         this.setState({todo: updatedTodoChange});       
     }
@@ -113,12 +113,13 @@ class Todo extends Component {
                                     <div className="modal-dialog">                              
                                         <div className="modal-content">
                                             <div className="modal-body">
-                                                <p>Change Task</p>                                             
+                                                <p>Change Task</p>   
+                                                 <p>noi dung task: { emp.name }</p>                                               
                                             </div>
                                                 <div class="input-group input-group-lg" >
                                                     <span class="input-group-addon">Your task</span>
                                                     <input type="text" class="form-control"
-                                                       value =  {emp.name}
+                                                       value =  {this.state.task}
                                                        onChange = {this.updateState} 
                                                     />
                                                 </div>
