@@ -56,8 +56,10 @@ class Todo extends Component {
             task: todoTask.name
          });       
     }
-    todoChange = (value) => {
-        alert(value)
+    todoChange = (emp) => {
+        const todoChange = this.state.todo.findIndex((e) => e.id === emp.id);
+        const updatedTodoChange = update(this.state.todo, {$splice: [[todoChange, emp]]});
+        this.setState({todo: updatedTodoChange});
     }
     render() {
         return (
@@ -102,16 +104,16 @@ class Todo extends Component {
                                 </div>
                                 <span 
                                     className="glyphicon glyphicon-pencil"
-                                    data-toggle="modal" data-target='#myModal'
+                                    data-toggle="modal" data-target={`#change-${emp.id}`}
                                     onClick = {this.changeTask}
                                     id={emp.id}
                                 >
                                 </span>
-                                <div className="modal fade" id='myModal' role="dialog">
+                                <div className="modal fade" id={`change-${emp.id}`} role="dialog">
                                     <div className="modal-dialog">                              
                                         <div className="modal-content">
                                             <div className="modal-body">
-                                                <p>Change Task</p>                                                
+                                                <p>Change Task</p>                                             
                                             </div>
                                                 <div class="input-group input-group-lg" >
                                                     <span class="input-group-addon">Your task</span>
@@ -122,7 +124,7 @@ class Todo extends Component {
                                                 </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.id)}>Yes</button>
+                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp)}>Yes</button>
                                             </div>
                                         </div>                                    
                                     </div>
