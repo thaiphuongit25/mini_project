@@ -57,9 +57,9 @@ class Todo extends Component {
          });       
     }
     todoChange = (emp) => {
-        const todoChange = this.state.todo.findIndex((e) => e.id === emp.id);
+        const todoChange = this.state.todo.findIndex((k) => k.id === emp.id);
         const updatedTodoChange = update(this.state.todo, {$splice: [[todoChange, emp]]});
-        this.setState({todo: updatedTodoChange});
+        this.setState({todo: updatedTodoChange});       
     }
     render() {
         return (
@@ -118,7 +118,7 @@ class Todo extends Component {
                                                 <div class="input-group input-group-lg" >
                                                     <span class="input-group-addon">Your task</span>
                                                     <input type="text" class="form-control"
-                                                       value =  {this.state.task}
+                                                       value =  {emp.name}
                                                        onChange = {this.updateState} 
                                                     />
                                                 </div>
