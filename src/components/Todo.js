@@ -36,8 +36,7 @@ class Todo extends Component {
             }
         }         
     }
-    workDelete = (value) => {
-        alert(value)
+    workDelete = value => {
         let todoArray = this.state.todo.filter(todo => todo.id !== value)
         localStorage.setItem("todo", JSON.stringify(todoArray))
         this.setState({todo: todoArray});
@@ -46,7 +45,7 @@ class Todo extends Component {
     updateState = e => {
         this.setState({task: e.target.value});
     }
-    changeTask = (e) => {
+    changeTask = e => {
         let todoTask = this.state.todo.find((emp) => {
             if (emp.id === e.target.id) {
                 return emp
@@ -56,9 +55,8 @@ class Todo extends Component {
             task: todoTask.name
          });       
     }
-    todoChange = (emp) => {
-        const todoChange = this.state.todo.findIndex((e) => e.id === emp.id);
-        const updatedTodoChange = update(this.state.todo, {$splice: [[todoChange, 1, emp]]});
+    todoChange = (id, value) => {
+        const updatedTodoChange = update(this.state.todo, {$splice: [[id, 1, value]]});
         this.setState({todo: updatedTodoChange});       
     }
     render() {
@@ -125,7 +123,7 @@ class Todo extends Component {
                                                 </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp)}>Yes</button>
+                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.id, emp.name)}>Yes</button>
                                             </div>
                                         </div>                                    
                                     </div>
