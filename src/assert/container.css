@@ -45,3 +45,11 @@
 .show {
   display: block;
 }
+
+.hide-show {
+  display: none;
+}
+
+.todoContent:hover .hide-show {
+  display: block;
+}

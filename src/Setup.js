@@ -21,6 +21,7 @@ class Setup extends Component {
     setUp = (e) => {
         let text = this.refs.name.value
         localStorage.setItem('setting', text)
+        window.location.reload();
     }
     render() {
         return (

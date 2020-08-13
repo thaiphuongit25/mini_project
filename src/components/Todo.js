@@ -7,25 +7,29 @@ class Todo extends Component {
         super(props);
         this.state = {
             todo: [],
-            data: localStorage.getItem('setting')
+            data: localStorage.getItem('setting'),
+            className: 'hide'
         }      
         this.name = React.createRef();
     }
+
     componentDidMount () {
         let atr = localStorage.getItem("todo");
         if (atr) {
             this.setState({todo: JSON.parse(atr)});
         }
     }
+
     creatTask = (e) => {
         let text = this.name.current.value
         this.name.current.value = ''
-        if(text.length == 0) {
+        if (text.length == 0) {
             alert('Vui lòng nhập công việc')
         } else {
             let atr =  this.state.todo.concat([{name: text, id: idGenerator()}]);
-            localStorage.setItem("todo", JSON.stringify(atr))
+            this.state.data = localStorage.getItem("setting")
             if(atr.length <= this.state.data) {
+                localStorage.setItem("todo", JSON.stringify(atr))
                 this.setState({
                     todo: atr
                 });
@@ -35,12 +39,14 @@ class Todo extends Component {
         }
          
     }
+
     workDelete = (e, value) => {
         let todoArray = this.state.todo.filter(todo => todo.id !== value)
         localStorage.setItem("todo", JSON.stringify(todoArray))
         this.setState({todo: todoArray});
         window.location.reload();
     }
+
     render() {
         return (
             <div>
@@ -61,10 +67,10 @@ class Todo extends Component {
                 <div>
                     {this.state.todo.map((emp, i) => {
                         return (
-                            <div className="alert alert-success "  role="alert" key={i}>
+                            <div className="alert alert-success todoContent"  role="alert" key={i}>
                                 {emp.name}
                                 <span 
-                                    className="glyphicon glyphicon-trash"
+                                    className= "glyphicon glyphicon-trash hide-show" 
                                     data-toggle="modal" data-target={`#${emp.id}`}
                                 >
                                 </span>
