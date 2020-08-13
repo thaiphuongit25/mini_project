@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import idGenerator from "react-id-generator";
 import Setup from './../Setup'
-import { Alert } from 'react-bootstrap';
 
 class Todo extends Component {
     constructor(props) {
@@ -62,7 +61,6 @@ class Todo extends Component {
                 e.name = this.state.task
             }
         })
-        window.location.reload();
     }
     render() {
         return (
