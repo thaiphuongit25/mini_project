@@ -114,12 +114,13 @@ class Todo extends Component {
                                     <div className="modal-dialog">                              
                                         <div className="modal-content">
                                             <div className="modal-body">
-                                                <p>Change Task</p>                                                
+                                                <p>Change Task</p>   
+                                                 <p>noi dung task: { emp.name }</p>                                               
                                             </div>
                                                 <div class="input-group input-group-lg" >
                                                     <span class="input-group-addon">Your task</span>
                                                     <input type="text" class="form-control"
-                                                       value =  {this.state.task}
+                                                       value =  {emp.name}
                                                        onChange = {this.updateState} 
                                                     />
                                                 </div>
