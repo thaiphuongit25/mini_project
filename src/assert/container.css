@@ -1,0 +1,55 @@
+.container {
+    height: 1000px;
+    width: 100%;
+    background: #6a99b5;
+    text-align: center;
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+  .col-md-4 {
+    height: auto;
+    background-color: #d3dfeb;
+  }
+  .row div:nth-last-child(2) {
+    border-right: 30px solid #6a99b5;
+  }
+  .row div:nth-last-child(3) {
+    border-right: 30px solid #6a99b5;
+  }
+  .status {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  .inner-addon {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    left:  0px;
+  }
+  .left-addon input  { padding-left:  30px; }
+  .alert-info {
+    padding-left: 10px;
+  }
+  .toDo {
+    margin-top: 10px;
+  }
+ 
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.hide-show {
+  display: none;
+}
+
+.todoContent:hover .hide-show {
+  display: block;
+}
