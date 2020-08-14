@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Done extends Component {
     render() {
         return (
-            <div>
+            <div className='kanbanBoard'>
                 <div className='status'>
                     <b>Done <span className="label label-success">0</span></b>
                 </div>

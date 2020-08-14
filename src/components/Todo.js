@@ -8,7 +8,7 @@ class Todo extends Component {
         this.state = {
             todo: [],
             data: localStorage.getItem('setting'),
-            task: ''
+            task: '',
         }      
         this.name = React.createRef();
         this.updateState = this.updateState.bind(this)
@@ -26,8 +26,9 @@ class Todo extends Component {
             alert('Vui lòng nhập công việc')
         } else {
             let atr =  this.state.todo.concat([{name: text, id: idGenerator()}]);
-            localStorage.setItem("todo", JSON.stringify(atr))
+            this.state.data = localStorage.getItem('setting')
             if(atr.length <= this.state.data) {
+                localStorage.setItem("todo", JSON.stringify(atr))
                 this.setState({
                     todo: atr
                 });
@@ -61,10 +62,14 @@ class Todo extends Component {
                 e.name = this.state.task
             }
         })
+
+        this.setState({ 
+            todo: this.state.todo
+        });
     }
     render() {
         return (
-            <div>
+            <div className='kanbanBoard'>
                 <div className='status'>
                     <b>Todo <span className="label label-danger">{ this.state.todo.length }</span></b>
                 </div>
@@ -82,55 +87,64 @@ class Todo extends Component {
                 <div>
                     {this.state.todo.map((emp, i) => {
                         return (
-                            <div className="alert alert-success "  role="alert" key={i}>
-                                {emp.name}
-                                <span 
-                                    className="glyphicon glyphicon-trash"
-                                    data-toggle="modal" data-target={`#${emp.id}`}
-                                >
-                                </span>
-                                <div className="modal fade" id={`${emp.id}`} role="dialog">
-                                    <div className="modal-dialog">                              
-                                        <div className="modal-content">
-                                            <div className="modal-body">
-                                                <p>Delete Task</p>
-                                                <p>You sent a request to delete this task. Are you sure?</p>
-                                            </div>
-                                            <div className="modal-footer">
-                                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.workDelete(emp.id)}>Yes</button>
-                                            </div>
-                                        </div>                                    
-                                    </div>
+                            <div className="alert alert-success kanbanShow"  role="alert" key={i}>
+
+                                <div className='kanbanShow-task '>
+                                    {emp.name}
                                 </div>
-                                <span 
-                                    className="glyphicon glyphicon-pencil"
-                                    data-toggle="modal" data-target={`#change-${emp.id}`}
-                                    onClick = {this.changeTask}
-                                    id={emp.id}
-                                >
-                                </span>
-                                <div className="modal fade" id={`change-${emp.id}`} role="dialog">
-                                    <div className="modal-dialog">                              
-                                        <div className="modal-content">
-                                            <div className="modal-body">
-                                                <p>Change Task</p>   
-                                                 <p>noi dung task: { emp.name }</p>                                               
-                                            </div>
-                                                <div class="input-group input-group-lg" >
-                                                    <span class="input-group-addon">Your task</span>
-                                                    <input type="text" class="form-control"
-                                                       value =  {emp.name}
-                                                       onChange = {this.updateState} 
-                                                    />
+
+                                <div className='kanbanShow-deleteChange'>
+                                    <span
+                                        className="glyphicon glyphicon-trash kanbanDelete"
+                                        data-toggle="modal" data-target={`#${emp.id}`}
+                                        type="button"
+                                    >
+                                    </span>
+                                    <div className="modal fade" id={`${emp.id}`} role="dialog">
+                                        <div className="modal-dialog">                              
+                                            <div className="modal-content">
+                                                <div className="modal-body">
+                                                    <p>Delete Task</p>
+                                                    <p>You sent a request to delete this task. Are you sure?</p>
                                                 </div>
-                                            <div className="modal-footer">
-                                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.name)}>Yes</button>
-                                            </div>
-                                        </div>                                    
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.workDelete(emp.id)}>Yes</button>
+                                                </div>
+                                            </div>                                    
+                                        </div>
                                     </div>
-                                </div>                            
+
+                                    <span
+                                        className="glyphicon glyphicon-pencil kanbanChange"
+                                        data-toggle="modal" data-target={`#change-${emp.id}`}
+                                        onClick = {this.changeTask}
+                                        id={emp.id}
+                                        type="button"
+                                    >
+                                    </span>
+                                    <div className="modal fade" id={`change-${emp.id}`} role="dialog">
+                                        <div className="modal-dialog">                              
+                                            <div className="modal-content">
+                                                <div className="modal-body">
+                                                    <p>Change Task</p>                                                
+                                                </div>
+                                                    <div class="input-group input-group-lg" >
+                                                        <span class="input-group-addon">Your task</span>
+                                                        <input type="text" class="form-control"
+                                                        value =  {this.state.task}
+                                                        onChange = {this.updateState} 
+                                                        />
+                                                    </div>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.name)}>Yes</button>
+                                                </div>
+                                            </div>                                    
+                                        </div>
+                                    </div> 
+
+                                </div>
                             </div>
                         )
                     })}

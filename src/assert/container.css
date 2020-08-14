@@ -2,15 +2,18 @@
     height: 1000px;
     width: 100%;
     background: #6a99b5;
-    text-align: center;
     padding-left: 200px;
     padding-right: 200px;
   }
   .col-md-4 {
     height: auto;
     background-color: #d3dfeb;
+    
   }
-  .row .col-md-4 {
+  .kanbanBoard .status {
+    text-align: center;
+  }
+  .row .col-md-4:not(:last-child) {
     border-right: 30px solid #6a99b5;
   }
   .status {
@@ -34,11 +37,35 @@
   .toDo {
     margin-top: 10px;
   }
- 
-.hide {
-  display: none;
+.kanbanDelete, .kanbanChange {
+ display: none;
+}
+.kanbanShow {
+  background: #fff;
+  color: #333;
+}
+.kanbanShow:hover .kanbanDelete {
+  display: inline-block;
+}
+.kanbanShow:hover .kanbanChange {
+  display: inline-block;
+}
+.kanbanShow-deleteChange {
+  padding-left: 270px;
+}
+.kanbanDelete {
+  margin-right: 5px;
+  padding: 3px;
+  font-size: 20px;
+}
+.kanbanChange {
+  padding: 2px;
+  font-size: 17px;
+}
+.kanbanShow-deleteChange span:hover {
+  background: pink;
+  width: auto;
+  height: auto;
+  border-radius: 2px;
 }
 
-.show {
-  display: block;
-}
