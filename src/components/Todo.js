@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import idGenerator from "react-id-generator";
-import Setup from './../Setup'
 
 class Todo extends Component {
     constructor(props) {
@@ -22,11 +21,11 @@ class Todo extends Component {
     creatTask = (e) => {
         let text = this.name.current.value
         this.name.current.value = ''
-        if(text.length == 0) {
+        if (text.length == 0) {
             alert('Vui lòng nhập công việc')
         } else {
             let atr =  this.state.todo.concat([{name: text, id: idGenerator()}]);
-            this.state.data = localStorage.getItem('setting')
+            this.state.data = localStorage.getItem('settingTodo')
             if(atr.length <= this.state.data) {
                 localStorage.setItem("todo", JSON.stringify(atr))
                 this.setState({
@@ -133,12 +132,12 @@ class Todo extends Component {
                                                         <span class="input-group-addon">Your task</span>
                                                         <input type="text" class="form-control"
                                                         value =  {this.state.task}
-                                                        onChange = {this.updateState} 
+                                                        onChange = {this.updateTodo} 
                                                         />
                                                     </div>
                                                 <div className="modal-footer">
                                                     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.name)}>Yes</button>
+                                                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => this.todoChange(emp.name)}>Save</button>
                                                 </div>
                                             </div>                                    
                                         </div>

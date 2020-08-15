@@ -1,27 +1,41 @@
   
 import React, { Component } from 'react';
+import { logRoles } from '@testing-library/react';
 
 class Setup extends Component {
     constructor(props) {
         super(props);
     
         this.state = {
-            data: ''
+            dataTodo: '',
+            datDoing: ''
         }
-        this.updateState = this.updateState.bind(this)
+        this.updateDoing = this.updateDoing.bind(this)
+        this.updateTodo = this.updateTodo.bind(this)
     }
-    updateState(e) {
-        this.setState({data: e.target.value});
+    updateDoing(e) {
+        this.setState({dataTodo: e.target.value});
+     }
+    updateTodo(e) {
+        this.setState({dataDoing: e.target.value});
      }
     componentDidMount () {
-        let atr = localStorage.getItem('setting');
-        if (atr) {
-            this.setState({data: atr});
+        let todo = localStorage.getItem('settingTodo');
+        if (todo) {
+            this.setState({dataTodo: todo});
+        }
+
+        let doing = localStorage.getItem('settingDoing');
+        if (doing) {
+            this.setState({dataDoing: doing});
         }
     }
     setUp = (e) => {
-        let text = this.refs.name.value
-        localStorage.setItem('setting', text)
+        let todo = this.refs.todo.value
+        let doing = this.refs.doing.value
+        localStorage.setItem('settingTodo', todo)
+        localStorage.setItem('settingDoing', doing)
+        
     }
     render() {
         return (
@@ -37,12 +51,22 @@ class Setup extends Component {
                             <div className="modal-content">
                                 <div className="modal-body">
                                     <p>Set up your Kanban</p>
+
                                     <div className="input-group input-group-lg">
                                         <span className="input-group-addon">Max to-do tasks</span>
                                         <input type="number" class="form-control"
                                             value = {this.state.data}
-                                            ref ='name'
-                                            onChange = {this.updateState} 
+                                            ref ='todo'
+                                            onChange = {this.updateTodo} 
+                                        />
+                                    </div>
+
+                                    <div className="input-group input-group-lg">
+                                        <span className="input-group-addon">Max doing tasks</span>
+                                        <input type="number" class="form-control"
+                                            value = {this.state.data}
+                                            ref ='doing'
+                                            onChange = {this.updateDoing} 
                                         />
                                     </div>
                                 </div>
