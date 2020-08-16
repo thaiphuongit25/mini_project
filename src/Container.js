@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './assert/container.css';
-import Todo from './components/Todo'
-import Doing from './components/Doing'
-import Done from './components/Done'
+import Item from './components/Item'
+
 
 class Container extends Component {
     render() {
@@ -10,13 +9,19 @@ class Container extends Component {
             <div className="container">          
                 <div className="row">
                     <div className="col-md-4">
-                        <Todo />
+                        <Item itemName='Todo'
+                              itemColor='label label-warning'  
+                        />
                     </div>
                     <div className="col-md-4">
-                        <Doing />
+                        <Item itemName='Doing'
+                              itemColor='label label-success'     
+                        />
                     </div>                                          
                     <div className="col-md-4">
-                        <Done />
+                        <Item itemName='Done'
+                              itemColor='label label-danger'     
+                        />
                     </div> 
                 </div>                    
             </div>   
