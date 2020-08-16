@@ -1,0 +1,70 @@
+.container {
+  height: 1000px;
+  width: 100%;
+  background: #6a99b5;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+.col-md-4 {
+  height: auto;
+  background-color: #d3dfeb;
+  
+}
+.kanbanBoard .status {
+  text-align: center;
+}
+.row .col-md-4:not(:last-child) {
+  border-right: 30px solid #6a99b5;
+}
+.status {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.inner-addon {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  left:  0px;
+}
+.left-addon input  { padding-left:  30px; }
+.alert-info {
+  padding-left: 10px;
+}
+.toDo {
+  margin-top: 10px;
+}
+.kanbanDelete, .kanbanChange {
+display: none;
+}
+.kanbanShow {
+background: #fff;
+color: #333;
+}
+.kanbanShow:hover .kanbanDelete {
+display: inline-block;
+}
+.kanbanShow:hover .kanbanChange {
+display: inline-block;
+}
+.kanbanShow-deleteChange {
+padding-left: 270px;
+}
+.kanbanDelete {
+margin-right: 5px;
+padding: 3px;
+font-size: 20px;
+}
+.kanbanChange {
+padding: 2px;
+font-size: 17px;
+}
+.kanbanShow-deleteChange span:hover {
+background: pink;
+width: auto;
+height: auto;
+border-radius: 2px;
+}
