@@ -7,22 +7,50 @@ class Setup extends Component {
         super(props);
     
         this.state = {
-            dataTodo: ''
+            setUp: [
+                {
+                    data: 10,
+                    refName: 'todo',
+                    taskName: 'Max to-do tasks',
+                },
+                {
+                    data: 3,
+                    refName: 'doing',
+                    taskName: 'Max doing tasks',
+                },
+                {
+                    data: 10,
+                    refName: 'done',
+                    taskName: 'Max done tasks',
+                }
+            ]
         }
-        this.updateTodo = this.updateTodo.bind(this)
+        this.update = this.update.bind(this)
     }
-    updateTodo(e) {
-        this.setState({dataTodo: e.target.value});
-     }
+    update(event) {
+        this.setState({data: event.target.value});
+    }
     componentDidMount () {
-        let todo = localStorage.getItem('settingTodo');
+        let todo = localStorage.getItem(`settingTodo`);
         if (todo) {
-            this.setState({dataTodo: todo});
+            this.setState({data: todo});
+        }
+
+        let doing = localStorage.getItem(`settingDoing`);
+        if (doing) {
+            this.setState({data: doing});
+        }
+
+        let done = localStorage.getItem(`settingDone`);
+        if (done) {
+            this.setState({data: done});
         }
     }
-    setUp = (e) => {
-        let todo = this.refs.todo.value
-        localStorage.setItem('settingTodo', todo)
+    setUp = () => {
+        let todo = this.refs.todo.value, doing = this.refs.doing.value, done = this.refs.done.value
+        localStorage.setItem(`settingTodo`, todo)
+        localStorage.setItem(`settingDoing`, doing)
+        localStorage.setItem(`settingDone`, done)        
         
     }
     render() {
@@ -42,14 +70,20 @@ class Setup extends Component {
                                 <div className="modal-body">
                                     <p>Set up your Kanban</p>
 
-                                    <div className="input-group input-group-lg">
-                                        <span className="input-group-addon">Max to-do tasks</span>
-                                        <input type="number" class="form-control"
-                                            value = {this.state.data}
-                                            ref ='todo'
-                                            onChange = {this.updateTodo} 
-                                        />
-                                    </div>
+                                    {
+                                        this.state.setUp.map((emp, id) => {
+                                            return (
+                                                <div className="input-group input-group-lg">
+                                                    <span className="input-group-addon">{emp.taskName}</span>
+                                                    <input type="number" class="form-control"
+                                                        value = {emp.data}
+                                                        ref = {emp.refName}
+                                                        onChange = {this.update} 
+                                                    />
+                                                </div>
+                                            )
+                                        })
+                                    }
 
                                 </div>
                                 <div className="modal-footer">
