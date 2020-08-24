@@ -7,34 +7,50 @@ class Setup extends Component {
         super(props);
     
         this.state = {
-            dataTodo: '',
-            datDoing: ''
+            setUp: [
+                {
+                    data: 10,
+                    refName: 'todo',
+                    taskName: 'Max to-do tasks',
+                },
+                {
+                    data: 3,
+                    refName: 'doing',
+                    taskName: 'Max doing tasks',
+                },
+                {
+                    data: 10,
+                    refName: 'done',
+                    taskName: 'Max done tasks',
+                }
+            ]
         }
-        this.updateDoing = this.updateDoing.bind(this)
-        this.updateTodo = this.updateTodo.bind(this)
+        this.update = this.update.bind(this)
     }
-    updateDoing(e) {
-        this.setState({dataTodo: e.target.value});
-     }
-    updateTodo(e) {
-        this.setState({dataDoing: e.target.value});
-     }
+    update(event) {
+        this.setState({data: event.target.value});
+    }
     componentDidMount () {
-        let todo = localStorage.getItem('settingTodo');
+        let todo = localStorage.getItem(`settingTodo`);
         if (todo) {
-            this.setState({dataTodo: todo});
+            this.setState({data: todo});
         }
 
-        let doing = localStorage.getItem('settingDoing');
+        let doing = localStorage.getItem(`settingDoing`);
         if (doing) {
-            this.setState({dataDoing: doing});
+            this.setState({data: doing});
+        }
+
+        let done = localStorage.getItem(`settingDone`);
+        if (done) {
+            this.setState({data: done});
         }
     }
-    setUp = (e) => {
-        let todo = this.refs.todo.value
-        let doing = this.refs.doing.value
-        localStorage.setItem('settingTodo', todo)
-        localStorage.setItem('settingDoing', doing)
+    setUp = () => {
+        let todo = this.refs.todo.value, doing = this.refs.doing.value, done = this.refs.done.value
+        localStorage.setItem(`settingTodo`, todo)
+        localStorage.setItem(`settingDoing`, doing)
+        localStorage.setItem(`settingDone`, done)        
         
     }
     render() {
@@ -42,33 +58,33 @@ class Setup extends Component {
             <div className='title'>
                 <div className='title-name'><i>Kanban Board</i></div>
                 <div>
+
                     <div className="title-setUp glyphicon glyphicon-cog"
                          data-toggle="modal" data-target="#setting"
                     >                       
-                    </div>                   
+                    </div>
+
                     <div className="modal fade" id="setting" role="dialog">
                         <div className="modal-dialog">                              
                             <div className="modal-content">
                                 <div className="modal-body">
                                     <p>Set up your Kanban</p>
 
-                                    <div className="input-group input-group-lg">
-                                        <span className="input-group-addon">Max to-do tasks</span>
-                                        <input type="number" class="form-control"
-                                            value = {this.state.data}
-                                            ref ='todo'
-                                            onChange = {this.updateTodo} 
-                                        />
-                                    </div>
+                                    {
+                                        this.state.setUp.map((emp, id) => {
+                                            return (
+                                                <div className="input-group input-group-lg">
+                                                    <span className="input-group-addon">{emp.taskName}</span>
+                                                    <input type="number" class="form-control"
+                                                        value = {emp.data}
+                                                        ref = {emp.refName}
+                                                        onChange = {this.update} 
+                                                    />
+                                                </div>
+                                            )
+                                        })
+                                    }
 
-                                    <div className="input-group input-group-lg">
-                                        <span className="input-group-addon">Max doing tasks</span>
-                                        <input type="number" class="form-control"
-                                            value = {this.state.data}
-                                            ref ='doing'
-                                            onChange = {this.updateDoing} 
-                                        />
-                                    </div>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -76,6 +92,7 @@ class Setup extends Component {
                                 </div>
                             </div>                                    
                         </div>
+
                     </div>    
                 </div>
             </div>

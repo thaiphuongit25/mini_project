@@ -1,51 +1,52 @@
 import React, { Component } from 'react';
 import idGenerator from "react-id-generator";
 
-class Item extends Component {
+class Todo extends Component {
     constructor(props) {
         super(props);
-    
         this.state = {
-            taskShows: [],
+            todo: [],
+            data: localStorage.getItem('setting'),
             task: '',
-            data: ''
-        }
+        }      
         this.name = React.createRef();
+        this.updateState = this.updateState.bind(this)
     }
     componentDidMount () {
         let atr = localStorage.getItem("todo");
         if (atr) {
-            this.setState({taskShows: JSON.parse(atr)});
+            this.setState({todo: JSON.parse(atr)});
         }
     }
-    creatTask = () => {
+    creatTask = (e) => {
         let text = this.name.current.value
         this.name.current.value = ''
         if (text.length == 0) {
             alert('Vui lòng nhập công việc')
         } else {
-            let atr =  this.state.taskShows.concat([{name: text, id: idGenerator()}]);
+            let atr =  this.state.todo.concat([{name: text, id: idGenerator()}]);
             this.state.data = localStorage.getItem('settingTodo')
             if(atr.length <= this.state.data) {
                 localStorage.setItem("todo", JSON.stringify(atr))
                 this.setState({
-                    taskShows: atr
+                    todo: atr
                 });
             } else {
                 alert('số lượng công việc ở cột to_do đã đạt giới hạn. Để thêm công việc, vui lòng xóa bớt hoặc thay đổi trong mục cài đặt')
             }
-        }                
+        }         
     }
     workDelete = value => {
-        let todoArray = this.state.taskShows.filter(todo => todo.id !== value)
-        localStorage.setItem("ab", JSON.stringify(todoArray))
-        this.setState({taskShows: todoArray});
+        let todoArray = this.state.todo.filter(todo => todo.id !== value)
+        localStorage.setItem("todo", JSON.stringify(todoArray))
+        this.setState({todo: todoArray});
+        window.location.reload();
     }
-    updateTask = e => {
+    updateState = e => {
         this.setState({task: e.target.value});
     }
     changeTask = e => {
-        let todoTask = this.state.taskShows.find((emp) => {
+        let todoTask = this.state.todo.find((emp) => {
             if (emp.id === e.target.id) {
                 return emp
             }
@@ -55,38 +56,43 @@ class Item extends Component {
          });       
     }
     todoChange = (value) => {
-        this.state.taskShows.map(e => {
+        this.state.todo.map(e => {
             if(e.name === value) {
                 e.name = this.state.task
             }
         })
 
         this.setState({ 
-            taskShows: this.state.taskShows
+            todo: this.state.todo
         });
     }
     render() {
         return (
             <div className='kanbanBoard'>
                 <div className='status'>
-                    <b>{this.props.itemName} <span className={this.props.itemColor}>{this.state.taskShows.length}</span></b>
+                    <b>Todo <span className="label label-danger">{ this.state.todo.length }</span></b>
                 </div>
                 <div className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-plus"  onClick={() => this.creatTask()}></i>      
-                    <input type="text" className="form-control" 
+                    <i className="glyphicon glyphicon-plus"
+                        onClick={() => this.creatTask()}
+                    >
+                    </i>      
+                    <input type="text" 
+                           className="form-control" 
                            placeholder="Type task and press Enter to add ..."
                            ref={this.name}
                     />
                 </div>
-                {
-                    this.state.taskShows.map((emp, i) => {
+                <div>
+                    {this.state.todo.map((emp, i) => {
                         return (
                             <div className="alert alert-success kanbanShow"  role="alert" key={i}>
-                                <div className='kanbanShow-task '>
-                                        {emp.name}
-                                </div>
-                                <div className='kanbanShow-deleteChange'>
 
+                                <div className='kanbanShow-task '>
+                                    {emp.name}
+                                </div>
+
+                                <div className='kanbanShow-deleteChange'>
                                     <span
                                         className="glyphicon glyphicon-trash kanbanDelete"
                                         data-toggle="modal" data-target={`#${emp.id}`}
@@ -126,7 +132,7 @@ class Item extends Component {
                                                         <span class="input-group-addon">Your task</span>
                                                         <input type="text" class="form-control"
                                                         value =  {this.state.task}
-                                                        onChange = {this.updateTask} 
+                                                        onChange = {this.updateTodo} 
                                                         />
                                                     </div>
                                                 <div className="modal-footer">
@@ -138,13 +144,13 @@ class Item extends Component {
                                     </div> 
 
                                 </div>
-                            </div>                           
+                            </div>
                         )
-                    })
-                }
+                    })}
+                </div>
             </div>
         );
     }
 }
 
-export default Item
+export default Todo;
