@@ -9,7 +9,7 @@ class Setup extends Component {
         this.state = {
             setUp: [
                 {
-                    data: 10,
+                    data: 7,
                     refName: 'todo',
                     taskName: 'Max to-do tasks',
                 },
